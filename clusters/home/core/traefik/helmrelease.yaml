@@ -14,7 +14,7 @@ spec:
         name: traefik
   interval: 24h0m0s
   releaseName: traefik
-  targetNamespace: default
+  targetNamespace: traefik
   values:
     deployment:
       kind: DaemonSet

@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: miniflux-configuration
+    namespace: home-services
+stringData:
+    DATABASE_URL: ENC[AES256_GCM,data:0+sx1zo7FIxeK19E8uf83tsCmvjxIJ2CWbG84htIHfdBf6s3j0liJ1M2kVDXjREVq8cMj0H0i2tt/zyzkRhDnMsnKY7DQWKdkrQ=,iv:bKIMudxtXuUTb3eC3UIYcWiXzTPkAaktK+ICfbKfcFY=,tag:BZy7oZ8KMGdACwHDM7gBeA==,type:str]
+    ADMIN_USERNAME: ENC[AES256_GCM,data:plJfRU0=,iv:RZqt5HAetcHZ3Uo+AMTa5fo2Q0JrvKoK//7z0ZgHhX4=,tag:vOIFq7YXB+qp9eFdi62ZGw==,type:str]
+    ADMIN_PASSWORD: ENC[AES256_GCM,data:jRCMyfmFenabZpSTz59z,iv:PbAa7H8RCcCUwJEUHeMvsm7wpaOw3T54zCTzO2+yhIs=,tag:uWcDayGwHJ8rY1yRkwiH/w==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1zmdp0ldxvwhr7uun970y32rj3f6m8xj2vgj52jzxqx57y4kgsdjsxldn5v
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCa1hkUFoxK1RZNG1xdU1m
+            ZFR6SFR4NkJRVCtHSG84dUpLRWlFMmJmMW5VCkxRMER6RGRrZE04cVNqeGJvK2dv
+            YlkzbXRFVnpvNmVWL0tXWmRDcDRYdWsKLS0tIDhPUnRCdjE5aUFyNmtBeGVVV3FF
+            d2RmYTA2VXpPcDRVc0hQc0J0dHVYMlEK7pVFlQcWWveGrURsG0JE7Qq4PpRI6Bq0
+            +GTKuVqIrq/SSo/EU2kZ9CGMHeGDCeQ5DJTTX+cU7GGf5jiZR55c+g==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-03-13T16:24:51Z"
+    mac: ENC[AES256_GCM,data:Millv4dsVZW6CxR67mRHEDNjmOKeciafIm6n73PS4TyU1DsDrov0mW5hjkSZDSdL+ddWiQiqzk+n7u6QXdolx8xMME9tBAhwNKsFTNW/2qqOfLzzPu+mwe8ipzg/kP+JQt4ofyKNxPck41EiyTwHOkC0qQy9jmXXmNA9tJMltMc=,iv:szhvCl7wxllwIkmWRNgHqPM0FtuLeg7GevSAD815bs0=,tag:2ERDEkE+PNqj2cgANbcBmw==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3

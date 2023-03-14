@@ -17,11 +17,6 @@ spec:
   releaseName: mealie
   targetNamespace: home-services
   values:
-    image:
-      tag: frontend-v1.0.0beta-5
-    api:
-      image:
-        tag: api-v1.0.0beta-5
     ingress:
       main:
         enabled: true

@@ -1,0 +1,36 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: mealie
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: mealie
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: geek-cookbook
+        namespace: flux-system
+  interval: 24h0m0s
+  releaseName: mealie
+  targetNamespace: home-services
+  values:
+    image:
+      tag: frontend-v1.0.0beta-5
+    api:
+      image:
+        tag: api-v1.0.0beta-5
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: mealie.domain.com
+            paths:
+              - path: "/"
+        tls:
+          - hosts:
+              - mealie.domain.com
+            secretName: domain-com-staging-tls
+

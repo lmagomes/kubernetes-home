@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: firefly-iii-configuration
+    namespace: home-services
+stringData:
+    APP_KEY: ENC[AES256_GCM,data:ZIPD2KOWkq1ULBSvPtPKRKVxfJNnuP/jRqWocQ8ED18=,iv:z6pepCW41425HyHla3U6cWKGzmhe036m+3i4+1z6ibg=,tag:FTTPz+j+LHAPnomEvHSV3A==,type:str]
+    DB_HOST: ENC[AES256_GCM,data:dh+G1LYSzt6JdQ==,iv:qRDo2BJcFREa6mpADTYuHR3j257ypt3q8d8l9zBbjYE=,tag:yWXWX7IAEC9pKVY7farIig==,type:str]
+    DB_CONNECTION: ENC[AES256_GCM,data:AHi/4Ic=,iv:VpjhJgDb5RARttB1AgdhQMBzqrs4p5CL7OlR6gMBcM8=,tag:OvYLlXRAlfhbgWWSypFerg==,type:str]
+    DB_DATABASE: ENC[AES256_GCM,data:1dTW27a40ZPN,iv:4jwZPBXtNNUNP+PzIUyRAb7fKQFOX/p5fgQTeiyBzQQ=,tag:XNIhdnPgDQYnTJMY66+AVQ==,type:str]
+    DB_PASSWORD: ENC[AES256_GCM,data:1liVhjuM6sJE3rKN2/qqEg==,iv:eBF2WWtocHn5dXhWJFZ+b64XqZomrkNrpY6PHtRCU+c=,tag:+xqOEwBE5orUCda5aq9hiw==,type:str]
+    DB_PORT: ENC[AES256_GCM,data:BnNtgQ==,iv:HUTj5+i27He4aTuhoxXzbMY6L3D3fxfOWj5tklfYdUM=,tag:aFudw9NeNVTTCFm3Xi10YA==,type:str]
+    DB_USERNAME: ENC[AES256_GCM,data:7U5Vw6THwQ==,iv:b0r9O2ElewWQgTOS99f3VeZXPhdMSN77WoJ+qT0W6VQ=,tag:fTcW+dQ0vWpVrpg7MXjBDg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1zmdp0ldxvwhr7uun970y32rj3f6m8xj2vgj52jzxqx57y4kgsdjsxldn5v
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBCa1hkUFoxK1RZNG1xdU1m
+            ZFR6SFR4NkJRVCtHSG84dUpLRWlFMmJmMW5VCkxRMER6RGRrZE04cVNqeGJvK2dv
+            YlkzbXRFVnpvNmVWL0tXWmRDcDRYdWsKLS0tIDhPUnRCdjE5aUFyNmtBeGVVV3FF
+            d2RmYTA2VXpPcDRVc0hQc0J0dHVYMlEK7pVFlQcWWveGrURsG0JE7Qq4PpRI6Bq0
+            +GTKuVqIrq/SSo/EU2kZ9CGMHeGDCeQ5DJTTX+cU7GGf5jiZR55c+g==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-03-14T12:29:00Z"
+    mac: ENC[AES256_GCM,data:n7r1R4B37Luzjo279IQq+VBipMkKItVPF2jbOeep6MrKMErYtpNScj1xJ/zPv36gabNLO5B/25+cjDli1MOQ9NFE98Oe13NyqEYsajJoBhR48N+lTS0BtbfU5OtAWftWeVy38z0WLh11xQ5C9aV5+4D01qs/2ewOByF00dWGNQ0=,iv:f+SlwUAcQL5Tc5TOh7UyHi0u0bskKhqh139XvYk59o4=,tag:uyNlQG2CkIfam/JbIPvXEw==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3

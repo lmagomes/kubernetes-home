@@ -1,0 +1,57 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US
+  keyboard:
+    layout: pt
+  ssh:
+    install-server: true
+    allow-pw: true
+    disable_root: true
+    ssh_quiet_keygen: true
+    allow_public_ssh_keys: true
+  packages:
+    - qemu-guest-agent
+    - sudo
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - lsb-release
+    - nfs-common
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  user-data:
+    package_upgrade: false
+    timezone: Europe/Lisbon
+    users:
+      - name: lgomes
+        groups: [adm, sudo]
+        lock-passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        ssh_authorized_keys:
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK17BmmAI6rIDb8x43AMltcyD5OgLgK0NhsrZ6uy7fJF lmagomes@pm.me
+    write_files:
+    - path: /etc/modules-load.d/k8s.conf
+      content: |
+        br_netfilter  
+    - path: /etc/sysctl.d/15-k8s.conf
+      content: |
+        net.bridge.bridge-nf-call-ip6tables = 1
+        net.bridge.bridge-nf-call-iptables = 1
+    runcmd:
+      - swapoff /swap.img # disable swap
+      - rm /swap.img
+      - sed -i '/swap/d' /etc/fstab
+      - curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg # Add k8s repository
+      - echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+      - apt-get update -y # Update and install packages
+      - apt-get -y install kubeadm kubectl kubelet containerd 
+      - mkdir /etc/containerd
+      - containerd config default | sudo tee /etc/containerd/config.toml
+      - sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+      - sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+      - sysctl --system # Reload settings from all system configuration files to take iptables configuration  

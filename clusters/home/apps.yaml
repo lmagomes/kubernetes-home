@@ -1,0 +1,53 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: apps-setup
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infra-services
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/helm-repos
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: apps-repos
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: apps-setup
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/helm-repos
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: apps
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  dependsOn:
+    - name: apps-repos
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./apps/home-services
+  prune: true
+  wait: true
+  timeout: 5m0s

@@ -8,3 +8,6 @@ k8s-ctrlr
 k8s-node-1
 k8s-node-2
 k8s-node-3
+
+[development]
+dev-01

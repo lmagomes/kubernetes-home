@@ -1,0 +1,10 @@
+[all:vars]
+ansible_user=lgomes
+
+[controllers]
+k8s-ctrlr
+
+[nodes]
+k8s-node-1
+k8s-node-2
+k8s-node-3

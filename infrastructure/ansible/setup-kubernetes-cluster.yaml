@@ -1,0 +1,36 @@
+---
+- hosts: controllers
+  tasks:
+  - name: initialize k8s
+    become: yes
+    ansible.builtin.shell: kubeadm init --control-plane-endpoint={{hostvars[inventory_hostname]['ansible_default_ipv4']['address']}} --node-name {{ inventory_hostname }} --pod-network-cidr=10.244.0.0/16
+
+  - name: Setup configuration
+    shell: |
+      mkdir -p $HOME/.kube
+      sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+      sudo chown -R $(id -u):$(id -g) $HOME/.kube
+
+  - name: Install the Flannel overlay network
+    shell: kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+  
+  - name: Get join command from controller
+    become: yes
+    shell: kubeadm token create --print-join-command
+    register: join_command
+
+  # - name: Print return information from the previous task
+  #   ansible.builtin.debug:
+  #     var: join_command.stdout_lines[0]
+
+  - name: copy the kubeconfig file
+    fetch:
+     src: ~/.kube/config
+     dest: ~/.kube/
+     flat: yes
+
+- hosts: nodes
+  tasks:
+  - name: Join the controller
+    become: yes
+    shell: "{{ hostvars['k8s-ctrlr']['join_command'].stdout_lines[0] }}"

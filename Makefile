@@ -11,6 +11,13 @@ clean-template:
 cluster:
 	@$(MAKE)  -C provisioning/terraform/
 	ansible-playbook -i provisioning/ansible/inventory provisioning/ansible/setup-kubernetes-cluster.yaml
+	cat $SOPS_AGE_KEY_FILE  | kubectl create secret generic sops-age --namespace=flux-system --from-file=age.agekey=/dev/stdin
+	flux bootstrap github \
+		--owner=$$GITHUB_USER \
+		--repository=kubernetes-home \
+		--branch=main \
+		--path=./clusters/home \
+		--personal
 
 .PHONY: clean-cluster
 clean-cluster:

@@ -9,7 +9,7 @@ spec:
     - name: infra-services
   interval: 1h
   retryInterval: 1m
-  timeout: 5m
+  timeout: 25m
   sourceRef:
     kind: GitRepository
     name: flux-system

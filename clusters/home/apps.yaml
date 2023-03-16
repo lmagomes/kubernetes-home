@@ -13,7 +13,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infrastructure/helm-repos
+  path: ./apps/setup
   prune: true
   wait: true
 ---
@@ -31,7 +31,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infrastructure/helm-repos
+  path: ./apps/helm-repos
   prune: true
   wait: true
 ---

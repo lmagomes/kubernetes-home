@@ -5,9 +5,9 @@ metadata:
   name: domain-com
   namespace: home-services
 spec:
-  secretName: domain-com-staging-tls
+  secretName: domain-com-tls
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt
     kind: ClusterIssuer
   commonName: "*.domain.com"
   dnsNames:

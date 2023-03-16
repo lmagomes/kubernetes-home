@@ -27,5 +27,5 @@ spec:
         tls:
           - hosts:
               - mealie.domain.com
-            secretName: domain-com-staging-tls
+            secretName: domain-com-tls
 

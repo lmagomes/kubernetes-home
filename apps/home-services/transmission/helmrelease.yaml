@@ -64,7 +64,7 @@ spec:
         tls:
           - hosts:
               - transmission.domain.com
-            secretName: domain-com-staging-tls
+            secretName: domain-com-tls
 
     # -- Configure persistence settings for the chart under this key.
     # @default -- See values.yaml

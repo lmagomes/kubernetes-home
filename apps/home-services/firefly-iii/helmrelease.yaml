@@ -39,4 +39,4 @@ spec:
       tls:
         - hosts:
             - firefly.domain.com
-          secretName: domain-com-staging-tls
+          secretName: domain-com-tls

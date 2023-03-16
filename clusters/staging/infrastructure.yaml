@@ -2,55 +2,43 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: apps-setup
+  name: infra-repos
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: infra-services
-  interval: 1h
-  retryInterval: 1m
-  timeout: 25m
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-  path: ./apps/setup
-  prune: true
-  wait: true
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-kind: Kustomization
-metadata:
-  name: apps-repos
-  namespace: flux-system
-spec:
-  dependsOn:
-    - name: apps-setup
   interval: 1h
   retryInterval: 1m
   timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./apps/helm-repos
+  path: ./infrastructure/helm-repos
   prune: true
   wait: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: apps
+  name: infra-services
   namespace: flux-system
 spec:
-  interval: 10m0s
   dependsOn:
-    - name: apps-repos
+    - name: infra-repos
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./apps/home-services
+  path: ./infrastructure/services
   prune: true
-  wait: true
-  timeout: 5m0s
+  patches:
+    - patch: |
+        - op: replace
+          path: /spec/acme/server
+          value: https://acme-staging-v02.api.letsencrypt.org/directory
+      target:
+        kind: ClusterIssuer
+        name: letsencrypt
   decryption:
     provider: sops
     secretRef:

@@ -50,7 +50,7 @@ spec:
         tls:
           - hosts:
               - miniflux.domain.com
-            secretName: domain-com-staging-tls
+            secretName: domain-com-tls
 
     postgresql:
       enabled: false

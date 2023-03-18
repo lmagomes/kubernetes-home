@@ -1,0 +1,35 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: syncthing
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: syncthing
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: geek-cookbook
+        namespace: flux-system
+  interval: 24h0m0s
+  releaseName: syncthing
+  targetNamespace: home-services
+  values:
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: syncthing.domain.com
+            paths:
+              - path: "/"
+        tls:
+          - hosts:
+              - syncthing.domain.com
+            secretName: domain-com-tls
+      data:
+        enabled: true
+        mountPath: /var/syncthing
+        accessMode: ReadWriteMany
+        size: 100Gi

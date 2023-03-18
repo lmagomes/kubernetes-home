@@ -28,6 +28,7 @@ spec:
           - hosts:
               - syncthing.domain.com
             secretName: domain-com-tls
+    persistence:
       data:
         enabled: true
         mountPath: /var/syncthing

@@ -6,17 +6,17 @@ metadata:
   namespace: cert-manager
 spec:
   acme:
-    email: lmagomes@pm.me
+    email: ${EMAIL}
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt
     solvers:
       - dns01:
           cloudflare:
-            email: lmagomes@pm.me
+            email: ${EMAIL}
             apiTokenSecretRef:
               name: cloudflare-token-secret
               key: cloudflare-token
         selector:
           dnsZones:
-            - "domain.com"
+            - "${DOMAIN_NAME}"

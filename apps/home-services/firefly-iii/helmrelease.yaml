@@ -33,10 +33,10 @@ spec:
     ingress:
       enabled: true
       hosts:
-        - firefly.domain.com
+        - firefly.${DOMAIN_NAME}
       paths:
         - path: "/"
       tls:
         - hosts:
-            - firefly.domain.com
+            - firefly.${DOMAIN_NAME}
           secretName: domain-com-tls

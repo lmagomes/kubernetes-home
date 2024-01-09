@@ -44,12 +44,12 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: miniflux.domain.com
+          - host: miniflux.${DOMAIN_NAME}
             paths:
               - path: "/"
         tls:
           - hosts:
-              - miniflux.domain.com
+              - miniflux.${DOMAIN_NAME}
             secretName: domain-com-tls
 
     postgresql:

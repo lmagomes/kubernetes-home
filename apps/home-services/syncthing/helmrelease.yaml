@@ -21,12 +21,12 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: syncthing.domain.com
+          - host: syncthing.${DOMAIN_NAME}
             paths:
               - path: "/"
         tls:
           - hosts:
-              - syncthing.domain.com
+              - syncthing.${DOMAIN_NAME}
             secretName: domain-com-tls
     persistence:
       data:

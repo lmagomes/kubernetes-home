@@ -2,9 +2,31 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
+  name: infra-setup
+  namespace: flux-system
+spec:
+  interval: 1h
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/setup
+  prune: true
+  wait: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
   name: infra-repos
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: infra-setup
   interval: 1h
   retryInterval: 1m
   timeout: 5m
@@ -43,3 +65,8 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+  postBuild:
+    substitute: { }
+    substituteFrom:
+      - kind: Secret
+        name: cluster-secrets

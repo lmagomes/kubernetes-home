@@ -17,7 +17,7 @@ spec:
   targetNamespace: default
   values:
     nfs:
-      server: nas.domain.com
+      server: nas.${DOMAIN_NAME}
       path: /export/kubernetes
     # For creating the StorageClass automatically:
     storageClass:

@@ -2,13 +2,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: domain-com
+  name: ${DOMAIN_NAME/./-}
   namespace: home-services
 spec:
-  secretName: domain-com-tls
+  secretName: ${DOMAIN_NAME/./-}-tls
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
-  commonName: "*.domain.com"
+  commonName: "*.${DOMAIN_NAME}"
   dnsNames:
-    - "*.domain.com"
+    - "*.${DOMAIN_NAME}"

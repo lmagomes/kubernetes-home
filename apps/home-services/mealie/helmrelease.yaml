@@ -21,11 +21,11 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: mealie.domain.com
+          - host: mealie.${DOMAIN_NAME}
             paths:
               - path: "/"
         tls:
           - hosts:
-              - mealie.domain.com
+              - mealie.${DOMAIN_NAME}
             secretName: domain-com-tls
 

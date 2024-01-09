@@ -1,0 +1,75 @@
+---
+- hosts: development
+  vars:
+    username: lgomes
+  tasks:
+
+  - name: Enable k9s copr
+    community.general.copr:
+      state: enabled
+      name: luminoso/k9s
+
+  - name: Install Hashicorp yum_repository
+    yum_repository:
+      name: hashicorp
+      baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
+      description: Hashicorp Stable - $basearch
+      enabled: yes
+      gpgcheck: yes
+      gpgkey: https://rpm.releases.hashicorp.com/gpg
+      repo_gpgcheck: yes
+      state: present
+
+  - name: Install packages
+    dnf:
+      name:
+        - kubernetes-client
+        - helm
+        - ncurses
+        - fish
+        - k9s
+        - git
+        - age
+        - jq
+        - bat
+        - vim
+        - make
+        - terraform
+        - packer
+        - ansible
+      state: latest
+
+  - name: Install fluxcd
+    shell: curl -s https://fluxcd.io/install.sh | bash
+
+  - name: Install sops
+    shell: |
+      SOPS_VERSION=$(curl -s https://api.github.com/repos/mozilla/sops/releases/latest | jq .tag_name | tr -d '"')
+      dnf install -y https://github.com/mozilla/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION/v/}-1.x86_64.rpm
+    
+  - name: install cert-manager kubectl plugin
+    shell: |
+      curl -L -o /tmp/kubectl-cert-manager.tar.gz https://github.com/jetstack/cert-manager/releases/latest/download/kubectl-cert_manager-linux-amd64.tar.gz
+      tar xzf /tmp/kubectl-cert-manager.tar.gz -C /tmp
+      sudo mv /tmp/kubectl-cert_manager /usr/local/bin
+
+  - name: create user
+    ansible.builtin.user:
+      name: "{{ username }}"
+      shell: /bin/fish
+      groups: wheel
+      append: yes
+
+  - name: Deploy SSH Public Key
+    ansible.posix.authorized_key:
+      user: "{{ username }}"
+      state: present
+      key: "{{ lookup('file', '~/.ssh/id_ed25519_home.pub') }}"
+
+  - name: Make users passwordless for sudo in group wheel
+    lineinfile:
+      path: /etc/sudoers
+      state: present
+      regexp: '^%wheel'
+      line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+      validate: 'visudo -cf %s'

@@ -1,6 +1,6 @@
-# Ubuntu Server 22-10
+# Ubuntu Server 23-10
 # ---
-# Packer Template to create an Ubuntu Server (22-10) as a kubernetes template on Proxmox
+# Packer Template to create an Ubuntu Server (23-10) as a kubernetes template on Proxmox
 
 # Variable Definitions
 variable "proxmox_api_url" {
@@ -17,7 +17,7 @@ variable "proxmox_api_token_secret" {
 }
 
 # Resource Definiation for the VM Template
-source "proxmox" "ubuntu-server-k8s-template" {
+source "proxmox-iso" "ubuntu-server-k8s-template" {
  
     # Proxmox Connection Settings
     proxmox_url = "${var.proxmox_api_url}"
@@ -30,11 +30,10 @@ source "proxmox" "ubuntu-server-k8s-template" {
     vm_name = "ubuntu-server-k8s-template"
     template_description = "Ubuntu Server kubernetes template Image"
 
-    iso_file = "mila-isos:iso/ubuntu-22.10-live-server-amd64.iso"
+    iso_file = "mila-isos:iso/ubuntu-23.10-live-server-amd64.iso"
     iso_storage_pool = "mila-isos"
     unmount_iso = true
-    iso_checksum = "874452797430a94ca240c95d8503035aa145bd03ef7d84f9b23b78f3c5099aed"
-
+    iso_checksum = "d2fb80d9ce77511ed500bcc1f813e6f676d4a3577009dfebce24269ca23346a5"
 
     # VM System Settings
     qemu_agent = true
@@ -49,6 +48,7 @@ source "proxmox" "ubuntu-server-k8s-template" {
         storage_pool_type = "lvm"
         type = "scsi"
     }
+
     # VM CPU Settings
     cores = "1"
 
@@ -90,7 +90,7 @@ source "proxmox" "ubuntu-server-k8s-template" {
 
 build {
     name = "ubuntu-server-k8s-template"
-    sources = ["source.proxmox.ubuntu-server-k8s-template"]
+    sources = ["source.proxmox-iso.ubuntu-server-k8s-template"]
 
     # Provisioning the VM Template for Cloud-Init Integration in Proxmox #1
     provisioner "shell" {

@@ -30,6 +30,8 @@ resource "proxmox_vm_qemu" "k8s-server" {
     bridge  = "vmbr0"
     model   = "virtio"
     macaddr = each.value.macaddr
+    firewall  = false
+    link_down = false
   }
 
   # disk {
@@ -47,4 +49,5 @@ resource "proxmox_vm_qemu" "k8s-server" {
   # (Optional) IP Address and Gateway
   # ipconfig0 = "ip=0.0.0.0/0,gw=0.0.0.0"
   ipconfig0 = "ip=dhcp"
+
 }

@@ -36,6 +36,10 @@ flux create helmrelease traefik \
     --interval 1440m0s \
     --export > clusters/home/traefik/helmrelease.yaml
 
+flux create source helm portainer \
+    --url https://portainer.github.io/k8s/ \
+    --interval 24h0m0s \
+    --export > infrastructure/helm-repos/portainer.yaml
 
 
 
@@ -66,6 +70,13 @@ flux create helmrelease transmission \
 
 
 
+flux create helmrelease portainer \
+    --source=HelmRepository/portainer \
+    --chart portainer \
+    --release-name portainer \
+    --target-namespace home-services \
+    --interval 1440m0s \
+    --export > apps/home-services/portainer/helmrelease.yaml
 
 
 

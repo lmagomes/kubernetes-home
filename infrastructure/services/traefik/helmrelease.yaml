@@ -23,7 +23,8 @@ spec:
         ingressClass: traefik-external
     ports:
       web:
-        redirectTo: websecure
+        redirectTo:
+          port: websecure
       websecure:
         tls:
           enabled: true

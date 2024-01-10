@@ -12,17 +12,18 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: portainer
+        namespace: flux-system
   interval: 24h0m0s
   releaseName: portainer
   targetNamespace: home-services
-
-  ingress:
-    enabled: true
-    hosts:
-      - host: portainer.${DOMAIN_NAME}
-        paths:
-          - path: "/"
-    tls:
-      - hosts:
-          - portainer.${DOMAIN_NAME}
-        secretName: domain-com-tls
+  values:
+    ingress:
+      enabled: true
+      hosts:
+        - host: portainer.${DOMAIN_NAME}
+          paths:
+            - path: "/"
+      tls:
+        - hosts:
+            - portainer.${DOMAIN_NAME}
+          secretName: domain-com-tls

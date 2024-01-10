@@ -41,16 +41,15 @@ spec:
             key: ADMIN_PASSWORD
 
     ingress:
-      main:
-        enabled: true
-        hosts:
-          - host: miniflux.${DOMAIN_NAME}
-            paths:
-              - path: "/"
-        tls:
-          - hosts:
-              - miniflux.${DOMAIN_NAME}
-            secretName: domain-com-tls
+      enabled: true
+      hosts:
+        - host: miniflux.${DOMAIN_NAME}
+          paths:
+            - path: "/"
+      tls:
+        - hosts:
+            - miniflux.${DOMAIN_NAME}
+          secretName: domain-com-tls
 
     postgresql:
       enabled: false

@@ -17,13 +17,12 @@ spec:
   targetNamespace: home-services
 
   ingress:
-    main:
-      enabled: true
-      hosts:
-        - host: portainer.${DOMAIN_NAME}
-          paths:
-            - path: "/"
-      tls:
-        - hosts:
-            - portainer.${DOMAIN_NAME}
-          secretName: domain-com-tls
+    enabled: true
+    hosts:
+      - host: portainer.${DOMAIN_NAME}
+        paths:
+          - path: "/"
+    tls:
+      - hosts:
+          - portainer.${DOMAIN_NAME}
+        secretName: domain-com-tls

@@ -1,0 +1,30 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: immich
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: immich
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: immich
+        namespace: flux-system
+  interval: 24h0m0s
+  releaseName: immich
+  targetNamespace: home-services
+
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - host: portainer.${DOMAIN_NAME}
+        paths:
+          - path: "/"
+    tls:
+      - hosts:
+          - portainer.${DOMAIN_NAME}
+        secretName: domain-com-tls

@@ -17,14 +17,21 @@ spec:
   releaseName: immich
   targetNamespace: home-services
 
-  server:
-    ingress:
+  values:
+    postgresql:
       enabled: true
-      hosts:
-        - host: portainer.${DOMAIN_NAME}
-          paths:
-            - path: "/"
-      tls:
-        - hosts:
-            - portainer.${DOMAIN_NAME}
-          secretName: domain-com-tls
+
+    redis:
+      enabled: true
+
+    server:
+      ingress:
+        enabled: true
+        hosts:
+          - host: portainer.${DOMAIN_NAME}
+            paths:
+              - path: "/"
+        tls:
+          - hosts:
+              - portainer.${DOMAIN_NAME}
+            secretName: domain-com-tls

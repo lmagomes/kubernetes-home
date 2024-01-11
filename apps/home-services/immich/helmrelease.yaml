@@ -18,6 +18,9 @@ spec:
   targetNamespace: home-services
 
   values:
+
+    immich.persistence.library.existingClaim: immich-nfs
+
     postgresql:
       enabled: true
 

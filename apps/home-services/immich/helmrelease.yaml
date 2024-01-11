@@ -26,12 +26,13 @@ spec:
 
     server:
       ingress:
-        enabled: true
-        hosts:
-          - host: portainer.${DOMAIN_NAME}
-            paths:
-              - path: "/"
-        tls:
-          - hosts:
-              - portainer.${DOMAIN_NAME}
-            secretName: domain-com-tls
+        main:
+          enabled: true
+          hosts:
+            - host: portainer.${DOMAIN_NAME}
+              paths:
+                - path: "/"
+          tls:
+            - hosts:
+                - portainer.${DOMAIN_NAME}
+              secretName: domain-com-tls

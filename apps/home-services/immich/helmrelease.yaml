@@ -18,8 +18,9 @@ spec:
   targetNamespace: home-services
 
   values:
-
-    immich.persistence.library.existingClaim: immich-nfs
+    persistence:
+      library:
+        existingClaim: immich-nfs
 
     postgresql:
       enabled: true
@@ -32,10 +33,10 @@ spec:
         main:
           enabled: true
           hosts:
-            - host: portainer.${DOMAIN_NAME}
+            - host: photos.${DOMAIN_NAME}
               paths:
                 - path: "/"
           tls:
             - hosts:
-                - portainer.${DOMAIN_NAME}
+                - photos.${DOMAIN_NAME}
               secretName: domain-com-tls

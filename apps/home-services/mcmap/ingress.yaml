@@ -16,6 +16,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: caddy
+            name: minecraft-map
             port:
               number: 80

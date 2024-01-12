@@ -28,4 +28,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
-    volumeName: mcmap-pv
+  volumeName: mcmap-pv

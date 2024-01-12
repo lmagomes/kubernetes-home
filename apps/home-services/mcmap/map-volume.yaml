@@ -3,9 +3,11 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: mcmap-pv
+  namespace: home-services
 spec:
   capacity:
     storage: 1Gi
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -21,8 +23,9 @@ metadata:
   namespace: home-services
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: nfs-client
   resources:
     requests:
       storage: 1Gi
+    volumeName: mcmap-pv

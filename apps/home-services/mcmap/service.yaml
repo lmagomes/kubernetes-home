@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: minecraft-map
+  namespace: home-services
+spec:
+  selector:
+    app: minecraft-map
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 2019

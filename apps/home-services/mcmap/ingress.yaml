@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minecraft-map-ingress
+  namespace: home-services
+spec:
+  tls:
+  - hosts:
+    - minecraft.domain.com
+    secretName: domain-com-tls
+  rules:
+  - host: minecraft.domain.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: minecraft-map
+            port:
+              number: 80

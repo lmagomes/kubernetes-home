@@ -7,11 +7,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: caddy
+      app: minecraft-map
   template:
     metadata:
       labels:
-        app: caddy
+        app: minecraft-map
     spec:
       containers:
       - name: caddy

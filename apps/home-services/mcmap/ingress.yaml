@@ -6,16 +6,16 @@ metadata:
 spec:
   tls:
   - hosts:
-    - minecraft.domain.com
+    - minecraft.${DOMAIN_NAME}
     secretName: domain-com-tls
   rules:
-  - host: minecraft.domain.com
+  - host: minecraft.${DOMAIN_NAME}
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: minecraft-map
+            name: minecraft-map-service
             port:
               number: 80

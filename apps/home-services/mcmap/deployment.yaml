@@ -16,6 +16,8 @@ spec:
       containers:
       - name: caddy
         image: caddy:latest
+        ports:
+        - containerPort: 2019
         resources:
           limits:
             cpu: "1"

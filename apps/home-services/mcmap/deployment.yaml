@@ -17,7 +17,7 @@ spec:
       - name: caddy
         image: caddy:latest
         ports:
-        - containerPort: 2019
+        - containerPort: 80
         resources:
           limits:
             cpu: "1"

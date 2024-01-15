@@ -39,4 +39,15 @@ spec:
       create: true
       passwordHash: $2a$10$DJpT2O7zwppJHlXfSsNddOvnGdD2o28Xy4q7gvq9H3CRFN5vzU7le
       username: admin
+    ingress:
+      enabled: true
+      hosts:
+        - host: flux.${DOMAIN_NAME}
+          paths:
+            - path: "/"
+      tls:
+        - hosts:
+            - flux.${DOMAIN_NAME}
+          secretName: domain-com-tls
+
 

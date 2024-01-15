@@ -17,6 +17,7 @@ spec:
   releaseName: mealie
   targetNamespace: home-services
   values:
+    replicaCount: 1
     ingress:
       main:
         enabled: true

@@ -45,6 +45,7 @@ spec:
         - host: flux.${DOMAIN_NAME}
           paths:
             - path: "/"
+              pathType: Prefix
       tls:
         - hosts:
             - flux.${DOMAIN_NAME}

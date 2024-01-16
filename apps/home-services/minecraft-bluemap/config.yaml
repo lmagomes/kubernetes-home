@@ -5,6 +5,10 @@ metadata:
   namespace: nginx-reverse-proxy
 data:
   nginx.conf: |
+    events {
+      worker_connections 1024;
+    }
+
     http {
       server {
         listen 80;

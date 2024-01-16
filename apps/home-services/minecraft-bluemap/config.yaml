@@ -5,20 +5,22 @@ metadata:
   namespace: nginx-reverse-proxy
 data:
   nginx.conf: |
-    server {
-      listen 80;
-      server_name domain.${DOMAIN_NAME};
+    http {
+      server {
+        listen 80;
+        server_name domain.${DOMAIN_NAME};
 
-      location / {
-        return 301 https://$host$request_uri;
+        location / {
+          return 301 https://$host$request_uri;
+        }
       }
-    }
 
-    server {
-      listen 443 ssl;
-      server_name domain.${DOMAIN_NAME};
+      server {
+        listen 443 ssl;
+        server_name domain.${DOMAIN_NAME};
 
-      location / {
-        proxy_pass http://papermc:8100;
+        location / {
+          proxy_pass http://papermc:8100;
+        }
       }
     }

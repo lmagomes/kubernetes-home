@@ -11,15 +11,6 @@ data:
         server_name domain.${DOMAIN_NAME};
 
         location / {
-          return 301 https://$host$request_uri;
-        }
-      }
-
-      server {
-        listen 443 ssl;
-        server_name domain.${DOMAIN_NAME};
-
-        location / {
           proxy_pass http://papermc:8100;
         }
       }

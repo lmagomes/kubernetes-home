@@ -1,31 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: minecraft-map
+  name: nginx
   namespace: home-services
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: minecraft-map
+      app: nginx
   template:
     metadata:
       labels:
-        app: minecraft-map
+        app: nginx
     spec:
       containers:
-      - name: caddy
-        image: caddy:latest
+      - name: nginx
+        image: nginx:1.19.2
         ports:
         - containerPort: 80
+        - containerPort: 443
         resources:
           limits:
             cpu: "1"
             memory: "500Mi"
         volumeMounts:
-        - mountPath: /usr/share/caddy
-          name: volume
+        - name: nginx-conf
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
       volumes:
-      - name: volume
-        persistentVolumeClaim:
-          claimName: mcmap-pvc
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf

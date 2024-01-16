@@ -16,6 +16,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: minecraft-map-service
+            name: nginx
             port:
               number: 80

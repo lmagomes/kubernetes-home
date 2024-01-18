@@ -17,7 +17,10 @@ spec:
   releaseName: mealie
   targetNamespace: home-services
   values:
-    replicaCount: 1
+    persistence:
+      api-data:
+        enabled: true
+        existingClaim: mealie-pvc
     ingress:
       main:
         enabled: true

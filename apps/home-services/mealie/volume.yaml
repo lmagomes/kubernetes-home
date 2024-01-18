@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mealie-pv
+  namespace: home-services
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-client
+  nfs:
+    server: nas.${DOMAIN_NAME}
+    path: /export/kubernetes/mealie
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mealie-pvc
+  namespace: home-services
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nfs-client
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: mealie-pv

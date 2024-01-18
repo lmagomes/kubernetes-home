@@ -7,7 +7,7 @@ spec:
   tls:
   - hosts:
     - minecraft.${DOMAIN_NAME}
-    secretName: domain-com-tls
+    secretName: ${DOMAIN_NAME/./-}-tls
   rules:
   - host: minecraft.${DOMAIN_NAME}
     http:

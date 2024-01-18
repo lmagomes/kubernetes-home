@@ -49,5 +49,5 @@ spec:
       tls:
         - hosts:
             - flux.${DOMAIN_NAME}
-          secretName: domain-com-tls
+          secretName: ${DOMAIN_NAME/./-}-tls
           pathType: Prefix

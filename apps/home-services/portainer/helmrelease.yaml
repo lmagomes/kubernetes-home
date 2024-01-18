@@ -26,4 +26,4 @@ spec:
       tls:
         - hosts:
             - portainer.${DOMAIN_NAME}
-          secretName: domain-com-tls
+          secretName: ${DOMAIN_NAME/./-}-tls

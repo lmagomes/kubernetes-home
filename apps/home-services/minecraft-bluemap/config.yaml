@@ -12,7 +12,7 @@ data:
     http {
       server {
         listen 80;
-        server_name domain.${DOMAIN_NAME};
+        server_name minecraft.${DOMAIN_NAME};
 
         location / {
           proxy_pass http://papermc:8100;

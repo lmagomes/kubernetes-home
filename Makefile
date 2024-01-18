@@ -31,7 +31,11 @@ bootstrap-flux:
 		--path=./clusters/home \
 		--personal
 	@echo 🎯 Creating SOPS age kubernetes secret
-	@cat $$SOPS_AGE_KEY_FILE  | kubectl create secret generic sops-age --namespace=flux-system --from-file=age.agekey=/dev/stdin
+	@if [ "$(shell kubectl get secrets sops-age2 -n flux-system >/dev/null 2>&1; echo $$?)" = "1" ]; then \
+		cat $$SOPS_AGE_KEY_FILE  | kubectl create secret generic sops-age --namespace=flux-system --from-file=age.agekey=/dev/stdin; \
+	else \
+		echo "Secret already exists. skipping."; \
+	fi
 	@echo 🎯 flux bootstraped and configured
 
 clean-flux:

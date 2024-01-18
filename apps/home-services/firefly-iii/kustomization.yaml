@@ -3,4 +3,5 @@ kind: Kustomization
 namespace: home-services
 resources:
   - firefly-iii-configuration.yaml
+  - volume.yaml
   - helmrelease.yaml

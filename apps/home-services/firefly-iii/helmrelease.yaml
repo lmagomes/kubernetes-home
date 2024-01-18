@@ -21,6 +21,9 @@ spec:
       repository: "fireflyiii/core"
       pullPolicy: Always
       tag: version-6.0.4
+    persistence:
+      enabled: true
+      existingClaim: "firefly-pvc"
     config:
       # -- Set this to the name of a secret to load environment variables from. If defined, values in the secret will override values in config.env
       existingSecret: "firefly-iii-configuration"

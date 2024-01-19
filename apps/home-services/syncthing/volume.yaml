@@ -6,7 +6,7 @@ metadata:
   namespace: home-services
 spec:
   capacity:
-    storage: 1Gi
+    storage: 100Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -27,5 +27,5 @@ spec:
   storageClassName: nfs-client
   resources:
     requests:
-      storage: 1Gi
+      storage: 100Gi
   volumeName: syncthing-pv

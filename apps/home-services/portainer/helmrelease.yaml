@@ -17,6 +17,9 @@ spec:
   releaseName: portainer
   targetNamespace: home-services
   values:
+    persistence:
+      enabled: true
+      existingClaim: portainer-pvc
     ingress:
       enabled: true
       hosts:

@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: paperless-media-pv
+  namespace: home-services
+spec:
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-client
+  nfs:
+    server: nas.${DOMAIN_NAME}
+    path: /export/kubernetes/paperless/media
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-media-pvc
+  namespace: home-services
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nfs-client
+  resources:
+    requests:
+      storage: 100Gi1Gi
+  volumeName: paperless-media-pv

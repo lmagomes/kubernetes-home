@@ -71,12 +71,14 @@ spec:
     persistence:
       config:
         enabled: true
+        existingClaim: transmission-config-pvc
         mountPath: /config
         accessMode: ReadWriteMany
         size: 256M
 
       downloads:
         enabled: true
+        existingClaim: transmission-downloads-pvc
         mountPath: /downloads
         accessMode: ReadWriteMany
         size: 100Gi

@@ -15,22 +15,22 @@ spec:
   interval: 24h0m0s
   releaseName: paperless
   targetNamespace: home-services
-values:
-  persistence:
-    data:
-      enabled: true
-      existingClaim: paperless-data-pvc
-    media:
-      enabled: true
-      existingClaim: paperless-media-pvc
-  ingress:
-    main:
-      enabled: true
-      hosts:
-        - host: paperless.${DOMAIN_NAME}
-          paths:
-            - path: "/"
-      tls:
-        - hosts:
-            - paperless.${DOMAIN_NAME}
-          secretName: ${DOMAIN_NAME/./-}-tls
+  values:
+    persistence:
+      data:
+        enabled: true
+        existingClaim: paperless-data-pvc
+      media:
+        enabled: true
+        existingClaim: paperless-media-pvc
+    ingress:
+      main:
+        enabled: true
+        hosts:
+          - host: paperless.${DOMAIN_NAME}
+            paths:
+              - path: "/"
+        tls:
+          - hosts:
+              - paperless.${DOMAIN_NAME}
+            secretName: ${DOMAIN_NAME/./-}-tls

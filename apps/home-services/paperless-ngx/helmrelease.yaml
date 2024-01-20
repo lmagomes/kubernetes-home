@@ -12,6 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: geek-cookbook
+        namespace: flux-system
   interval: 24h0m0s
   releaseName: paperless
   targetNamespace: home-services

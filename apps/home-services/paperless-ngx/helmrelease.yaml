@@ -17,6 +17,9 @@ spec:
   releaseName: paperless
   targetNamespace: home-services
   values:
+    image:
+      repository: ghcr.io/paperless-ngx/paperless-ngx
+      tag: 2.4.0
     persistence:
       data:
         enabled: true
